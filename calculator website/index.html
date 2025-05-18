@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beautiful Calculator</title>
+  <style>
+    body {
+      background-color: #f0f8ff; /* Light blue background */
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .calculator {
+      background-color: #ffffff; /* White calculator */
+      padding: 20px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 255, 0.2);
+      text-align: center;
+      width: 300px;
+    }
+
+    .calculator h2 {
+      color: #007BFF;
+      margin-bottom: 20px;
+    }
+
+    .calculator input[type="number"] {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #007BFF;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .calculator select, .calculator button {
+      width: 85%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 2px solid #007BFF;
+      background-color: #007BFF;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .calculator button:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h2>Simple Calculator</h2>
+    <input type="number" id="num1" placeholder="Enter first number (≤ 100)" max="100">
+    <input type="number" id="num2" placeholder="Enter second number (≤ 100)" max="100">
+    
+    <select id="operation">
+      <option value="add">Add</option>
+      <option value="subtract">Subtract</option>
+      <option value="multiply">Multiply</option>
+      <option value="divide">Divide</option>
+    </select>
+    
+    <button onclick="calculate()">Calculate</button>
+    
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculate() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+      const operation = document.getElementById('operation').value;
+      const resultBox = document.getElementById('result');
+
+      if (isNaN(num1) || isNaN(num2)) {
+        resultBox.innerText = "Please enter valid numbers.";
+        return;
+      }
+
+      if (num1 > 100 || num2 > 100) {
+        resultBox.innerText = "Both numbers must be ≤ 100.";
+        return;
+      }
+
+      let result;
+      switch (operation) {
+        case 'add':
+          result = num1 + num2;
+          break;
+        case 'subtract':
+          result = num1 - num2;
+          break;
+        case 'multiply':
+          result = num1 * num2;
+          break;
+        case 'divide':
+          result = num2 === 0 ? "Cannot divide by zero." : num1 / num2;
+          break;
+        default:
+          result = "Invalid operation.";
+      }
+
+      resultBox.innerText = `Result: ${result}`;
+    }
+  </script>
+</body>
+</html>
